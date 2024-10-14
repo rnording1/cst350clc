@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("cst350groupapp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+10d8d9cce2b43e258023fe5a19f505becb80c179")]
 [assembly: System.Reflection.AssemblyProductAttribute("cst350groupapp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("cst350groupapp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
