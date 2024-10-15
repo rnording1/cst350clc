@@ -1,7 +1,12 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\School\\CST-350\\repos\\cst350clc\\cst350groupapp\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{5CD557FB-77FC-4753-A8DC-EFF024145093}|cst350groupapp.csproj|d:\\school\\cst-350\\repos\\cst350clc\\cst350groupapp\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{5CD557FB-77FC-4753-A8DC-EFF024145093}|cst350groupapp.csproj|solutionrelative:.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 1,
@@ -9,7 +14,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 19,
           "Children": [
             {
               "$type": "Bookmark",
@@ -86,6 +91,19 @@
             {
               "$type": "Bookmark",
               "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": ".gitignore",
+              "DocumentMoniker": "D:\\School\\CST-350\\repos\\cst350clc\\cst350groupapp\\.gitignore",
+              "RelativeDocumentMoniker": ".gitignore",
+              "ToolTip": "D:\\School\\CST-350\\repos\\cst350clc\\cst350groupapp\\.gitignore",
+              "RelativeToolTip": ".gitignore",
+              "ViewState": "AgIAAMIBAAAAAAAAAAAAAOYBAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-10-15T19:11:46.071Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Bookmark",
