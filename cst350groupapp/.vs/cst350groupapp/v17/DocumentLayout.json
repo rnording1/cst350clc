@@ -1,7 +1,24 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\School\\CST-350\\repos\\cst350clc\\cst350groupapp\\",
-  "Documents": [],
+  "WorkspaceRootPath": "C:\\Users\\trevormarr\\source\\repos\\cst350clc\\cst350groupapp\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{5CD557FB-77FC-4753-A8DC-EFF024145093}|cst350groupapp.csproj|c:\\users\\trevormarr\\source\\repos\\cst350clc\\cst350groupapp\\views\\home\\startgame.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5CD557FB-77FC-4753-A8DC-EFF024145093}|cst350groupapp.csproj|solutionrelative:views\\home\\startgame.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5CD557FB-77FC-4753-A8DC-EFF024145093}|cst350groupapp.csproj|c:\\users\\trevormarr\\source\\repos\\cst350clc\\cst350groupapp\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5CD557FB-77FC-4753-A8DC-EFF024145093}|cst350groupapp.csproj|solutionrelative:controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5CD557FB-77FC-4753-A8DC-EFF024145093}|cst350groupapp.csproj|c:\\users\\trevormarr\\source\\repos\\cst350clc\\cst350groupapp\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5CD557FB-77FC-4753-A8DC-EFF024145093}|cst350groupapp.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5CD557FB-77FC-4753-A8DC-EFF024145093}|cst350groupapp.csproj|c:\\users\\trevormarr\\source\\repos\\cst350clc\\cst350groupapp\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5CD557FB-77FC-4753-A8DC-EFF024145093}|cst350groupapp.csproj|solutionrelative:models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 1,
@@ -9,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 21,
           "Children": [
             {
               "$type": "Bookmark",
@@ -90,6 +107,58 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\trevormarr\\source\\repos\\cst350clc\\cst350groupapp\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\trevormarr\\source\\repos\\cst350clc\\cst350groupapp\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAAMAAACYaGZmZmYUwB0AAAB3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-15T18:47:02.27Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "StartGame.cshtml",
+              "DocumentMoniker": "C:\\Users\\trevormarr\\source\\repos\\cst350clc\\cst350groupapp\\Views\\Home\\StartGame.cshtml",
+              "RelativeDocumentMoniker": "Views\\Home\\StartGame.cshtml",
+              "ToolTip": "C:\\Users\\trevormarr\\source\\repos\\cst350clc\\cst350groupapp\\Views\\Home\\StartGame.cshtml",
+              "RelativeToolTip": "Views\\Home\\StartGame.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAACBAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-15T18:46:41.964Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ErrorViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\trevormarr\\source\\repos\\cst350clc\\cst350groupapp\\Models\\ErrorViewModel.cs",
+              "RelativeDocumentMoniker": "Models\\ErrorViewModel.cs",
+              "ToolTip": "C:\\Users\\trevormarr\\source\\repos\\cst350clc\\cst350groupapp\\Models\\ErrorViewModel.cs",
+              "RelativeToolTip": "Models\\ErrorViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-15T18:45:48.027Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\trevormarr\\source\\repos\\cst350clc\\cst350groupapp\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\trevormarr\\source\\repos\\cst350clc\\cst350groupapp\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "Controllers\\HomeController.cs",
+              "ViewState": "AgIAAAUAAABwzMzMzIwjwBkAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-15T18:44:45.136Z",
+              "EditorCaption": ""
             }
           ]
         }
