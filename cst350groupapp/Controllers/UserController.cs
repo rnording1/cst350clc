@@ -1,15 +1,16 @@
 ﻿using cst350groupapp.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.RegularExpressions;
+using cst350groupapp.Filters;
 
 namespace cst350groupapp.Controllers
 {
     public class UserController : Controller
     {
         UsersDAO users = new UsersDAO();
-        public IActionResult Index()
+        public IActionResult Login()
         {
-            return View();
+            return View("Index");
         }
 
         public IActionResult ProcessLogin(LoginViewModel loginViewModel)
@@ -18,8 +19,10 @@ namespace cst350groupapp.Controllers
 
             if ( result > 0 )
             {
-                var user = users.GetUserById(result);
-                return View("LoginSuccess", user);
+                var userData = users.GetUserById(result);
+                string userJson = ServiceStack.Text.JsonSerializer.SerializeToString(userData);
+                HttpContext.Session.SetString("User", userJson);
+                return View("LoginSuccess", userData);
             }
             else
             {
@@ -27,6 +30,12 @@ namespace cst350groupapp.Controllers
             }
         }
 
+        [SessionCheckFilter]
+        public IActionResult Loggingout()
+        {
+            HttpContext.Session.Remove("User");
+            return RedirectToAction("Index", "Home");
+        }
         public IActionResult Register()
         {
             return View(new RegisterViewModel());

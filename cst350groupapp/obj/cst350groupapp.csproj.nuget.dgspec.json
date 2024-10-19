@@ -58,6 +58,10 @@
               "target": "Package",
               "version": "[8.0.6, )"
             },
+            "ServiceStack.Text": {
+              "target": "Package",
+              "version": "[8.4.0, )"
+            },
             "System.Data.SqlClient": {
               "target": "Package",
               "version": "[4.8.6, )"

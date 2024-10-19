@@ -23,12 +23,6 @@ namespace cst350groupapp.Controllers
             return View();
         }
 
-        // Adding logic viewing for the Game Page
-        public IActionResult StartGame()
-        {
-            return View();
-        }
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

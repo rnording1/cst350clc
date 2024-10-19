@@ -88,12 +88,12 @@ namespace cst350groupapp.Models
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
                             Username = reader.GetString(reader.GetOrdinal("Username")),
                             PasswordHash = reader.GetString(reader.GetOrdinal("PasswordHash")),
-                            Salt = reader.GetSqlBinary(reader.GetOrdinal("Salt")).Value,
+                            Salt = reader.GetFieldValue<byte[]>(reader.GetOrdinal("Salt")),
                             FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
                             LastName = reader.GetString(reader.GetOrdinal("LastName")),
                             Email = reader.GetString(reader.GetOrdinal("Email")),
                             Age = reader.GetInt32(reader.GetOrdinal("Age")),
-                            Sex = reader.GetInt32(reader.GetOrdinal("Sex"))
+                            Sex = reader.GetByte(reader.GetOrdinal("Sex"))
                         });
                     }
                 }
@@ -119,12 +119,12 @@ namespace cst350groupapp.Models
                                 Id = reader.GetInt32(reader.GetOrdinal("Id")),
                                 Username = reader.GetString(reader.GetOrdinal("Username")),
                                 PasswordHash = reader.GetString(reader.GetOrdinal("PasswordHash")),
-                                Salt = reader.GetSqlBinary(reader.GetOrdinal("Salt")).Value,
+                                Salt = reader.GetFieldValue<byte[]>(reader.GetOrdinal("Salt")),
                                 FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
                                 LastName = reader.GetString(reader.GetOrdinal("LastName")),
                                 Email = reader.GetString(reader.GetOrdinal("Email")),
                                 Age = reader.GetInt32(reader.GetOrdinal("Age")),
-                                Sex = reader.GetInt32(reader.GetOrdinal("Sex"))
+                                Sex = reader.GetByte(reader.GetOrdinal("Sex"))
                             };
                         }
                         else
