@@ -5948,19 +5948,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\trevormarr\\.nuget\\packages\\": {}
+    "C:\\Users\\cisco\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\trevormarr\\Source\\Repos\\cst350clc\\cst350groupapp\\cst350groupapp.csproj",
+      "projectUniqueName": "C:\\Users\\cisco\\OneDrive - Grand Canyon University\\College\\Classes\\CST-350\\Milestone\\cst350groupapp\\cst350groupapp.csproj",
       "projectName": "cst350groupapp",
-      "projectPath": "C:\\Users\\trevormarr\\Source\\Repos\\cst350clc\\cst350groupapp\\cst350groupapp.csproj",
-      "packagesPath": "C:\\Users\\trevormarr\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\trevormarr\\Source\\Repos\\cst350clc\\cst350groupapp\\obj\\",
+      "projectPath": "C:\\Users\\cisco\\OneDrive - Grand Canyon University\\College\\Classes\\CST-350\\Milestone\\cst350groupapp\\cst350groupapp.csproj",
+      "packagesPath": "C:\\Users\\cisco\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\cisco\\OneDrive - Grand Canyon University\\College\\Classes\\CST-350\\Milestone\\cst350groupapp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\trevormarr\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\cisco\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5968,7 +5968,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

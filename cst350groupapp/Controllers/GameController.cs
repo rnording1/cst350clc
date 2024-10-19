@@ -12,7 +12,7 @@ namespace cst350groupapp.Controllers
             if (string.IsNullOrEmpty(userJson))
             {
                 // If the user is not logged in, redirect them to the login page
-                return RedirectToAction("Login", "Account"); // Change "Account" to the correct controller handling login
+                return RedirectToAction("Login", "UserController"); // Change "Account" to the correct controller handling login
             }
 
             // User is logged in, proceed to display the StartGame view

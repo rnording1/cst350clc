@@ -12,6 +12,21 @@ namespace cst350groupapp.Controllers
             return View();
         }
 
+        public IActionResult ProcessLogin(LoginViewModel loginViewModel)
+        {
+            var result = users.CheckCredentials(loginViewModel.Username, loginViewModel.Password);
+
+            if ( result > 0 )
+            {
+                var user = users.GetUserById(result);
+                return View("LoginSuccess", user);
+            }
+            else
+            {
+                return View("LoginFailure");
+            }
+        }
+
         public IActionResult Register()
         {
             return View(new RegisterViewModel());
