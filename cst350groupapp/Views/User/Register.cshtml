@@ -4,7 +4,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="ProcessRegister">
+        <form asp-action="Register">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="FirstName" class="control-label"></label>
@@ -18,27 +18,18 @@
             </div>
             <div class="form-group">
                 <label asp-for="Sex" class="control-label"></label>
-                <div class="form-check">
-                    <input type="radio" asp-for="Sex" value="0" class="form-check-input" />
-                    <label class="form-check-label">Male</label>
-                </div>
-                <div class="form-check">
-                    <input type="radio" asp-for="Sex" value="1" class="form-check-input" />
-                    <label class="form-check-label">Female</label>
-                </div>
+                <input asp-for="Sex" class="form-control" />
                 <span asp-validation-for="Sex" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Age" class="control-label"></label>
-                <input asp-for="Age" class="form-control" type="number" min="0" step="1" />
+                <input asp-for="Age" class="form-control" />
                 <span asp-validation-for="Age" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
-                <span class="text-danger" data-valmsg-for="Email" data-valmsg-replace="true"></span>
-                <span class="text-danger" data-valmsg-for="Email" data-valmsg-replace="true" data-valmsg-type="email"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Username" class="control-label"></label>
@@ -47,9 +38,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" type="password" />
+                <input asp-for="Password" class="form-control" type="password" id="passwordField" />
                 <span asp-validation-for="Password" class="text-danger"></span>
-                <span class="text-info">Password should be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, and one number.</span>
             </div>
             <div class="form-group">
                 <div class="form-check">
@@ -65,21 +55,19 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back</a>
+    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
     <script>
         function togglePasswordVisibility() {
-            var passwordInput = document.getElementById("Password");
-            if (passwordInput.type === "password") {
-                passwordInput.type = "text";
+            var passwordField = document.getElementById("passwordField");
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
             } else {
-                passwordInput.type = "password";
+                passwordField.type = "password";
             }
         }
     </script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
