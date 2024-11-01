@@ -7,6 +7,7 @@
         public bool Visited { get; set; }
         public bool Live { get; set; }
         public int LiveNeighbors { get; set; }
+        public string ButtonImage { get; set; }
 
         public Cell() 
         {
@@ -15,6 +16,7 @@
             Visited = false;
             Live = false;
             LiveNeighbors = 0;
+            ButtonImage = "";
         }
 
         public Cell(int row, int column)
@@ -24,6 +26,7 @@
             Visited = false;
             Live = false; 
             LiveNeighbors = 0;
+            ButtonImage = "";
         }
     }
 }

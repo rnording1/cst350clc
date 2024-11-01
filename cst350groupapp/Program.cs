@@ -1,3 +1,5 @@
+using cst350groupapp.Models;
+
 namespace cst350groupapp
 {
     public class Program

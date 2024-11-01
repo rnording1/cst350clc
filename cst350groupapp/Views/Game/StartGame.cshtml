@@ -8,3 +8,11 @@
 <h2>Start Game</h2>
 
 <p>Welcome to the game! This page is accessible only to logged-in users.</p>
+
+<form asp-controller="Game" asp-action="PlayGame" method="post">
+    <!-- Test data to be replaced later -->
+    <input type="hidden" name="Rows" value="5" />
+    <input type="hidden" name="Columns" value="5" />
+    <input type="hidden" name="Difficulty" value="10" />
+    <button type="submit">New Game</button>
+</form>

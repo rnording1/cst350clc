@@ -1,16 +1,24 @@
-﻿namespace cst350groupapp.Models
+﻿using Microsoft.SqlServer.Server;
+
+namespace cst350groupapp.Models
 {
     public class Board
     {
         public int[] Size { get; set; }
         public Cell[,] Grid { get; set; }
         public double Difficulty { get; set; }
+        public string Message { get; set; }
+        public int PlayerId { get; set; }
 
-        public Board(int[] size)
+        //GameState 0 = playing, 1 = win, 2 = lose
+        public int GameState { get; set; }
+
+        public Board(int[] size, double difficulty, int playerId)
         {
             if (size.Length == 2 && size[0] > 0 && size[1] > 0)
             {
                 Size = size;
+                Message = "Click a button to start";
             }
             //set default value if invalid input sent
             else
@@ -21,13 +29,21 @@
 
                 Size = defaultSize;
 
-                Console.WriteLine("Warning: Invalid board size, size set to 1,1.");
+                Message = "Warning: Invalid board size, size set to 1,1.";
             }
 
             Grid = SetUpGrid();
 
-            Difficulty = 0;
+            Difficulty = difficulty;
 
+            setupLiveNeighbors();
+            calculateLiveNeighbors();
+            PlayerId = playerId;
+            GameState = 0;
+        }
+
+        public Board()
+        {
         }
 
         //populate each location in Grid with a cell
@@ -35,26 +51,21 @@
         {
             Grid = new Cell[Size[0], Size[1]];
 
-            int row = 0;
-            int col = 0;
-
-            for (row = 0; row < Size[0]; row++)
+            for (int row = 0; row < Size[0]; row++)
             {
-                for (col = 0; col < Size[1]; col++)
+                for (int col = 0; col < Size[1]; col++)
                 {
                     Grid[row, col] = new Cell(row + 1, col + 1);
                 }
             }
-            
 
             return Grid;
-
         }
 
         public void setupLiveNeighbors()
         {
             //check if difficulty is set up right
-            if(Difficulty >= 0 &&  Difficulty <= 100)
+            if (Difficulty >= 0 && Difficulty <= 100)
             {
                 //get total amount of cells
                 int totalCells = Size[0] * Size[1];
@@ -62,18 +73,17 @@
                 int liveCellCount = (int)(totalCells * (Difficulty / 100.0));
 
                 //Use a list to generate a random order of cells
-                List<(int, int)> gridPositions = new List<(int, int)> ();
-                for (int row = 0; row < Size[0];  row++)
+                List<(int, int)> gridPositions = new List<(int, int)>();
+                for (int row = 0; row < Size[0]; row++)
                 {
                     for (int col = 0; col < Size[1]; col++)
                     {
-                        gridPositions.Add(new(row, col));
+                        gridPositions.Add((row, col));
                     }
                 }
 
                 Random rand = new Random();
                 gridPositions = gridPositions.OrderBy(_ => rand.Next()).ToList();
-
 
                 //use random order to set the live value up to the number of live cells based on percentage
                 for (int live = 0; live < liveCellCount; live++)
@@ -110,7 +120,7 @@
                             int neighborCol = col + y;
 
                             //make sure the neighbor cell is within the Grid
-                            if(neighborRow >= 0 && neighborRow < rows && neighborCol >= 0 && neighborCol < cols)
+                            if (neighborRow >= 0 && neighborRow < rows && neighborCol >= 0 && neighborCol < cols)
                             {
                                 //count the live cells
                                 if (Grid[neighborRow, neighborCol].Live)
@@ -122,12 +132,10 @@
                     }
 
                     //set live neighbors to the count
-
                     Grid[row, col].LiveNeighbors = liveNeighborCount;
 
                 }
             }
         }
-
     }
 }
