@@ -6,7 +6,7 @@
 *@
 @{
         string? user = Context.Session.GetString("User");
-        UserModel? userObj = user != null ? ServiceStack.Text.JsonSerializer.DeserializeFromString<UserModel>(user) : null;
+        UserModel? userObj = user != null ? System.Text.Json.JsonSerializer.Deserialize<UserModel>(user) : null;
         string firstName = userObj?.FirstName ?? "Guest";
 }
 

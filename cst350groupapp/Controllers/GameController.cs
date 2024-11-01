@@ -2,7 +2,6 @@
 using cst350groupapp.Models;
 using cst350groupapp.Services;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 
 
 namespace cst350groupapp.Controllers
@@ -16,12 +15,8 @@ namespace cst350groupapp.Controllers
             // Get player ID from session
             int playerId = HttpContext.Session.GetObjectFromJson<UserModel>("User").Id;
 
-            // Calculate the number of mines based on difficulty percentage
-            int totalCells = startGameViewModel.Rows * startGameViewModel.Columns;
-            int numberOfMines = (int)(totalCells * (startGameViewModel.Difficulty / 100));
-
             // Create a new Board with the user's settings
-            var currentGame = new Board(new int[] { startGameViewModel.Rows, startGameViewModel.Columns }, numberOfMines, playerId);
+            var currentGame = new Board(new int[] { startGameViewModel.Rows, startGameViewModel.Columns }, startGameViewModel.Difficulty, playerId);
             HttpContext.Session.SetObjectAsJson("CurrentGame", currentGame);
 
             // Redirect to PlayGame to display the initialized game board
@@ -55,8 +50,14 @@ namespace cst350groupapp.Controllers
         public IActionResult PlayGame()
         {
             var currentGame = HttpContext.Session.GetObjectFromJson<Board>("CurrentGame");
+            int playerId = HttpContext.Session.GetObjectFromJson<UserModel>("User").Id;
 
-            if (currentGame == null)
+            //if the logged in user is not the same as the player id of the current game then redirect to start game
+            if (currentGame != null && currentGame.PlayerId != playerId)
+            {
+                return RedirectToAction("StartGame");
+            }
+            else if (currentGame == null)
             {
                 // If there's no game in session, redirect to StartGame
                 return RedirectToAction("StartGame");
@@ -79,7 +80,7 @@ namespace cst350groupapp.Controllers
                 }
                 else if (currentGame.GameState == 2) // Loss
                 {
-                    return RedirectToAction("LossPage");
+                    return RedirectToAction("LosePage");
                 }
             }
 
@@ -110,13 +111,9 @@ namespace cst350groupapp.Controllers
             HttpContext.Session.SetObjectAsJson("CurrentGame", currentGame);
 
             // Check if the game is over
-            if (currentGame.GameState == 1) // GameState == 1 means Win
+            if (currentGame.GameState != 0) // GameState == 0 means in progress
             {
-                return RedirectToAction("WinPage");
-            }
-            else if (currentGame.GameState == 2) // GameState == 2 means Loss
-            {
-                return RedirectToAction("LossPage");
+                return RedirectToAction("EndGame");
             }
 
             // Continue playing if the game is still ongoing
@@ -125,12 +122,12 @@ namespace cst350groupapp.Controllers
 
         public IActionResult WinPage()
         {
-            return View("WinPage");
+            return View();
         }
 
         public IActionResult LosePage()
         {
-            return View("LossPage");
+            return View();
         }
 
 
