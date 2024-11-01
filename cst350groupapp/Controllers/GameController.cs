@@ -11,6 +11,25 @@ namespace cst350groupapp.Controllers
     {
 
         [SessionCheckFilter]
+        public IActionResult InitializeGame(StartGameViewModel startGameViewModel)
+        {
+            // Get player ID from session
+            int playerId = HttpContext.Session.GetObjectFromJson<UserModel>("User").Id;
+
+            // Calculate the number of mines based on difficulty percentage
+            int totalCells = startGameViewModel.Rows * startGameViewModel.Columns;
+            int numberOfMines = (int)(totalCells * (startGameViewModel.Difficulty / 100));
+
+            // Create a new Board with the user's settings
+            var currentGame = new Board(new int[] { startGameViewModel.Rows, startGameViewModel.Columns }, numberOfMines, playerId);
+            HttpContext.Session.SetObjectAsJson("CurrentGame", currentGame);
+
+            // Redirect to PlayGame to display the initialized game board
+            return RedirectToAction("PlayGame");
+        }
+
+
+        [SessionCheckFilter]
         public IActionResult StartGame()
         {
 
@@ -33,27 +52,41 @@ namespace cst350groupapp.Controllers
         }
 
         [SessionCheckFilter]
-        public IActionResult PlayGame(StartGameViewModel startGameViewModel)
+        public IActionResult PlayGame()
         {
-            // Get player ID from session
-            int playerId = HttpContext.Session.GetObjectFromJson<UserModel>("User").Id;
-
             var currentGame = HttpContext.Session.GetObjectFromJson<Board>("CurrentGame");
-            //new game
+
             if (currentGame == null)
             {
-                currentGame = new Board(new int[] { startGameViewModel.Rows, startGameViewModel.Columns }, startGameViewModel.Difficulty, playerId);
-                HttpContext.Session.SetObjectAsJson("CurrentGame", currentGame);
-            }
-            //existing game, wrong player
-            else if (currentGame.PlayerId != playerId)
-            {
-                HttpContext.Session.Remove("CurrentGame");
+                // If there's no game in session, redirect to StartGame
                 return RedirectToAction("StartGame");
             }
 
             return View(currentGame);
         }
+
+
+        [SessionCheckFilter]
+        public IActionResult EndGame()
+        {
+            var currentGame = HttpContext.Session.GetObjectFromJson<Board>("CurrentGame");
+
+            if (currentGame != null)
+            {
+                if (currentGame.GameState == 1) // Win
+                {
+                    return RedirectToAction("WinPage");
+                }
+                else if (currentGame.GameState == 2) // Loss
+                {
+                    return RedirectToAction("LossPage");
+                }
+            }
+
+            // Fallback: if the game is still in progress or something went wrong, return to PlayGame
+            return RedirectToAction("PlayGame");
+        }
+
 
         [SessionCheckFilter]
         public IActionResult StartOver()
@@ -69,10 +102,40 @@ namespace cst350groupapp.Controllers
         {
             var currentGame = HttpContext.Session.GetObjectFromJson<Board>("CurrentGame");
             var boardService = new BoardService(currentGame);
+
+            // Perform the left click on the specified cell
             boardService.LeftClick(row, col);
+
+            // Update the game state in the session
             HttpContext.Session.SetObjectAsJson("CurrentGame", currentGame);
 
+            // Check if the game is over
+            if (currentGame.GameState == 1) // GameState == 1 means Win
+            {
+                return RedirectToAction("WinPage");
+            }
+            else if (currentGame.GameState == 2) // GameState == 2 means Loss
+            {
+                return RedirectToAction("LossPage");
+            }
+
+            // Continue playing if the game is still ongoing
             return RedirectToAction("PlayGame");
         }
+
+        public IActionResult WinPage()
+        {
+            return View("WinPage");
+        }
+
+        public IActionResult LosePage()
+        {
+            return View("LossPage");
+        }
+
+
+
+
+
     }
 }

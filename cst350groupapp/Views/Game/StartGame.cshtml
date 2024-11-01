@@ -9,10 +9,24 @@
 
 <p>Welcome to the game! This page is accessible only to logged-in users.</p>
 
-<form asp-controller="Game" asp-action="PlayGame" method="post">
-    <!-- Test data to be replaced later -->
-    <input type="hidden" name="Rows" value="5" />
-    <input type="hidden" name="Columns" value="5" />
-    <input type="hidden" name="Difficulty" value="10" />
+<form asp-action="InitializeGame" method="post">
+    <label for="Rows">Number of Rows:</label>
+    <input type="number" name="Rows" min="1" required />
+
+    <label for="Columns">Number of Columns:</label>
+    <input type="number" name="Columns" min="1" required />
+
+    <p>Select Difficulty:</p>
+    <label>
+        <input type="radio" name="Difficulty" value="10" required /> Easy (10% bombs)
+    </label>
+    <label>
+        <input type="radio" name="Difficulty" value="20" /> Medium (20% bombs)
+    </label>
+    <label>
+        <input type="radio" name="Difficulty" value="30" /> Hard (30% bombs)
+    </label>
+
     <button type="submit">New Game</button>
 </form>
+
