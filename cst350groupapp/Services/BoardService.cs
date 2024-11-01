@@ -100,8 +100,13 @@ namespace cst350groupapp.Services
         // on right click, flag the cell
         public void RightClick(int row, int col)
         {
+            //if the cell is visited, do nothing
+            if (_board.Grid[row, col].Visited)
+            {
+                return;
+            }
             //check if the cell is flagged, if so, unflag it
-            if (_board.Grid[row, col].ButtonImage == "flag.png")
+            else if (_board.Grid[row, col].ButtonImage == "flag.png")
             {
                 _board.Grid[row, col].ButtonImage = "";
             }

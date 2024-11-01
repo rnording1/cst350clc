@@ -55,6 +55,7 @@ namespace cst350groupapp.Controllers
             return View(currentGame);
         }
 
+        [SessionCheckFilter]
         public IActionResult StartOver()
         {
             HttpContext.Session.Remove("CurrentGame");
