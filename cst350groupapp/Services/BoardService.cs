@@ -71,6 +71,20 @@ namespace cst350groupapp.Services
         // on left click see if the button that was clicked had a bomb, game over if so. If not, flood fill.
         public void LeftClick(int row, int col)
         {
+            //save start time if it is the first click
+            if (_board.StartTime == null)
+            {
+                _board.StartTime = DateTime.Now;
+            }
+
+            //if the cell is visited, do nothing
+            if (_board.Grid[row, col].Visited)
+            {
+                _board.Message = "Cannot click a visited cell";
+                return;
+            }
+
+            //if the cell is flagged, do nothing
             if (_board.Grid[row, col].ButtonImage == "flag.png")
             {
                 _board.Message = "Cannot left click a flagged cell";
@@ -82,6 +96,8 @@ namespace cst350groupapp.Services
                 _board.Grid[row, col].ButtonImage = "bomb.png";
                 _board.Message = "Game Over!";
                 _board.GameState = 2;
+                _board.EndTime = DateTime.Now;
+                CalculateScore((int)Math.Round((_board.EndTime - _board.StartTime).Value.TotalSeconds));
             }
             //else, check for flood fill and update the status of the buttons
             else
@@ -92,6 +108,8 @@ namespace cst350groupapp.Services
                 {
                     _board.Message = "You Win!";
                     _board.GameState = 1;
+                    _board.EndTime = DateTime.Now;
+                    CalculateScore((int)Math.Round((_board.EndTime - _board.StartTime).Value.TotalSeconds));
                 }
             }
 
@@ -116,6 +134,29 @@ namespace cst350groupapp.Services
                 _board.Grid[row, col].ButtonImage = "flag.png";
             }
 
+        }
+
+        //calculate the score of the game. If the game is won, the score is the number of live cells * 100 - the time it took to win in seconds
+        public void CalculateScore(int time)
+        {
+
+            int liveCells = 0;
+
+            for (int r = 0; r < _board.Size[0]; ++r)
+            {
+                for (int c = 0; c < _board.Size[1]; ++c)
+                {
+                    if (_board.Grid[r, c].Live)
+                    {
+                        liveCells++;
+                    }
+                }
+            }
+
+            if (_board.GameState == 1)
+            {
+                _board.FinalScore = liveCells * 1000 - time;
+            }
         }
 
     }

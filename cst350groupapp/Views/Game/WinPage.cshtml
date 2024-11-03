@@ -1,8 +1,16 @@
-﻿@*
+﻿@model Board
+
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    var totalTime = Math.Round((Model.EndTime - Model.StartTime).Value.TotalSeconds);
 }
 <h1>Congratulations!</h1>
 <p>You have won the game!</p>
-<a asp-action="StartOver">Play Again</a>
+<p>Time to finish (seconds): @totalTime</p>
+<p>Total Score: @Model.FinalScore</p>
+
+<form asp-action="StartOver" method="get">
+    <button type="submit" class="start-over-button">Start Over</button>
+</form>

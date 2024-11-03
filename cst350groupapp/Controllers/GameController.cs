@@ -27,6 +27,7 @@ namespace cst350groupapp.Controllers
         [SessionCheckFilter]
         public IActionResult StartGame()
         {
+            var currentGame = HttpContext.Session.GetObjectFromJson<Board>("CurrentGame");
 
             // Check if the session variable "User" exists and is not null
             var userJson = HttpContext.Session.GetString("User");
@@ -37,8 +38,12 @@ namespace cst350groupapp.Controllers
             }
 
             //see if there is an active game
-            if(HttpContext.Session.GetObjectFromJson<Board>("CurrentGame") != null)
+            if(currentGame != null)
             {
+                if (currentGame.GameState == 1 || currentGame.GameState == 2) // Win or Loss
+                {
+                    return RedirectToAction("EndGame");
+                }
                 return RedirectToAction("PlayGame");
             }
 
@@ -110,24 +115,20 @@ namespace cst350groupapp.Controllers
             // Update the game state in the session
             HttpContext.Session.SetObjectAsJson("CurrentGame", currentGame);
 
-            // Check if the game is over
-            if (currentGame.GameState != 0) // GameState == 0 means in progress
-            {
-                return RedirectToAction("EndGame");
-            }
-
             // Continue playing if the game is still ongoing
             return RedirectToAction("PlayGame");
         }
 
         public IActionResult WinPage()
         {
-            return View();
+            var currentGame = HttpContext.Session.GetObjectFromJson<Board>("CurrentGame");
+            return View(currentGame);
         }
 
         public IActionResult LosePage()
         {
-            return View();
+            var currentGame = HttpContext.Session.GetObjectFromJson<Board>("CurrentGame");
+            return View(currentGame);
         }
 
 

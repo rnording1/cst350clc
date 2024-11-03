@@ -42,9 +42,17 @@
 
 <h2>@Model.Message</h2>
 
+
 <form asp-action="StartOver" method="get">
     <button type="submit" class="start-over-button">Start Over</button>
 </form>
+
+@if (Model.GameState != 0)
+{
+    <form asp-action="EndGame" method="get">
+        <button type="submit" class="start-over-button">See Stats</button>
+    </form>
+}
 
 <script>
     function setCoordinates(row, col) {

@@ -12,6 +12,9 @@ namespace cst350groupapp.Models
 
         //GameState 0 = playing, 1 = win, 2 = lose
         public int GameState { get; set; }
+        public int FinalScore { get; set; }
+        public DateTime? StartTime { get; set; }
+        public DateTime? EndTime { get; set; }
 
         public Board(int[] size, double difficulty, int playerId)
         {
@@ -40,6 +43,9 @@ namespace cst350groupapp.Models
             calculateLiveNeighbors();
             PlayerId = playerId;
             GameState = 0;
+            FinalScore = 0;
+            StartTime = null;
+            EndTime = null;
         }
 
         public Board()
