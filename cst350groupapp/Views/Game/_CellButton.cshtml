@@ -1,0 +1,12 @@
+﻿@model cst350groupapp.Models.CellButtonViewModel
+
+<button type="button" class="game-button" @(Model.GameState != 0 ? "disabled" : "") data-row="@Model.Row" data-col="@Model.Col">
+    @if (!string.IsNullOrEmpty(Model.Cell.ButtonImage))
+    {
+        <img src="/img/@Model.Cell.ButtonImage" alt="Button" />
+    }
+    else if (Model.Cell.Visited)
+    {
+        <span>@(Model.Cell.LiveNeighbors > 0 ? Model.Cell.LiveNeighbors.ToString() : "0")</span>
+    }
+</button>

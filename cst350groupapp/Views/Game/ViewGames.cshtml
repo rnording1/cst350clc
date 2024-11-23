@@ -1,0 +1,47 @@
+﻿@model List<GameViewModel>
+
+<div class="container mt-4">
+    <h2 class="text-center">Your Saved Games</h2>
+
+    <table class="table table-striped table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Game ID</th>
+                <th scope="col">Date Saved</th>
+                <th scope="col">Rows</th>
+                <th scope="col">Columns</th>
+                <th scope="col">Difficulty (%)</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var game in Model)
+            {
+                <tr>
+                    <th scope="row">@game.Id</th>
+                    <td>@game.DateSaved.ToString("g")</td>
+                    <td>@game.Rows</td>
+                    <td>@game.Columns</td>
+                    <td>@(game.Difficulty.ToString("0"))%</td>
+                    <td>
+                        <div class="btn-group" role="group">
+                            <!-- Load button -->
+                            <form asp-action="LoadGame" method="post">
+                                <input type="hidden" name="id" value="@game.Id" />
+                                <button type="submit" class="btn btn-primary btn-sm">Load</button>
+                            </form>
+
+                            <!-- Delete button -->
+                            <form asp-action="DeleteGame" method="post" onsubmit="return confirm('Are you sure you want to delete this game?');">
+                                <input type="hidden" name="id" value="@game.Id" />
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+

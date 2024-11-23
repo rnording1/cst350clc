@@ -19,5 +19,8 @@
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <PkgMicrosoft_CodeAnalysis_Analyzers Condition=" '$(PkgMicrosoft_CodeAnalysis_Analyzers)' == '' ">C:\Users\rober\.nuget\packages\microsoft.codeanalysis.analyzers\3.3.4</PkgMicrosoft_CodeAnalysis_Analyzers>
     <PkgMicrosoft_CodeAnalysis_AnalyzerUtilities Condition=" '$(PkgMicrosoft_CodeAnalysis_AnalyzerUtilities)' == '' ">C:\Users\rober\.nuget\packages\microsoft.codeanalysis.analyzerutilities\3.3.0</PkgMicrosoft_CodeAnalysis_AnalyzerUtilities>
+    <PkgGlimpse Condition=" '$(PkgGlimpse)' == '' ">C:\Users\rober\.nuget\packages\glimpse\1.8.2</PkgGlimpse>
+    <PkgGlimpse_AspNet Condition=" '$(PkgGlimpse_AspNet)' == '' ">C:\Users\rober\.nuget\packages\glimpse.aspnet\1.8.0</PkgGlimpse_AspNet>
+    <PkgGlimpse_Mvc5 Condition=" '$(PkgGlimpse_Mvc5)' == '' ">C:\Users\rober\.nuget\packages\glimpse.mvc5\1.5.3</PkgGlimpse_Mvc5>
   </PropertyGroup>
 </Project>

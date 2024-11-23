@@ -1,0 +1,19 @@
+﻿@model cst350groupapp.Models.Board
+@using cst350groupapp.Models
+
+<div class="minesweeper-grid" style="grid-template-columns: repeat(@Model.Size[1], 50px);">
+    @for (int row = 0; row < @Model.Size[0]; row++)
+    {
+        @for (int col = 0; col < @Model.Size[1]; col++)
+        {
+            var cell = Model.Grid[row][col];
+            <partial name="_CellButton" model="new cst350groupapp.Models.CellButtonViewModel
+                {
+                    Cell = cell,
+                    Row = row,
+                    Col = col,
+                    GameState = Model.GameState
+                }" />
+        }
+    }
+</div>

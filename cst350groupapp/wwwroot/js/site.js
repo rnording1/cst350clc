@@ -1,4 +1,15 @@
-﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿/* Center table text */
+table th, table td {
+    text - align: center;
+    vertical - align: middle;
+}
 
-// Write your JavaScript code.
+/* Adjust button spacing */
+.btn - group form {
+    margin - right: 5px;
+}
+
+/* Style the header */
+h2 {
+    margin - bottom: 30px;
+}
