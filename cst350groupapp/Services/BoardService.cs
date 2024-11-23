@@ -14,12 +14,12 @@ namespace cst350groupapp.Services
         void floodFill(int row, int col)
         {
             //check for out of bounds
-            if (row < 0 || row >= _board.Size[0] || col < 0 || col >= _board.Size[1] || _board.Grid[row, col].Visited)
+            if (row < 0 || row >= _board.Size[0] || col < 0 || col >= _board.Size[1] || _board.Grid[row][col].Visited)
                 return;
 
-            _board.Grid[row, col].Visited = true;
+            _board.Grid[row][col].Visited = true;
 
-            if (_board.Grid[row, col].LiveNeighbors == 0)
+            if (_board.Grid[row][col].LiveNeighbors == 0)
             {
                 floodFill(row - 1, col);
                 floodFill(row + 1, col);
@@ -39,7 +39,7 @@ namespace cst350groupapp.Services
             {
                 for (int c = 0; c < _board.Size[1]; ++c)
                 {
-                    if (_board.Grid[r, c].Visited == false && _board.Grid[r, c].Live == false)
+                    if (_board.Grid[r][c].Visited == false && _board.Grid[r][c].Live == false)
                     {
                         return false;
                     }
@@ -57,7 +57,7 @@ namespace cst350groupapp.Services
             {
                 for (int c = 0; c < _board.Size[1]; ++c)
                 {
-                    if (_board.Grid[r, c].Visited == false && _board.Grid[r, c].Live == true && _board.Grid[r, c].ButtonImage != "flag.png")
+                    if (_board.Grid[r][c].Visited == false && _board.Grid[r][c].Live == true && _board.Grid[r][c].ButtonImage != "flag.png")
                     {
                         return false;
                     }
@@ -78,22 +78,22 @@ namespace cst350groupapp.Services
             }
 
             //if the cell is visited, do nothing
-            if (_board.Grid[row, col].Visited)
+            if (_board.Grid[row][col].Visited)
             {
                 _board.Message = "Cannot click a visited cell";
                 return;
             }
 
             //if the cell is flagged, do nothing
-            if (_board.Grid[row, col].ButtonImage == "flag.png")
+            if (_board.Grid[row][col].ButtonImage == "flag.png")
             {
                 _board.Message = "Cannot left click a flagged cell";
                 return;
             }
             //check if a live cell was clicked and do a game over message if so
-            if (_board.Grid[row, col].Live)
+            if (_board.Grid[row][col].Live)
             {
-                _board.Grid[row, col].ButtonImage = "bomb.png";
+                _board.Grid[row][col].ButtonImage = "bomb.png";
                 _board.Message = "Game Over!";
                 _board.GameState = 2;
                 _board.EndTime = DateTime.Now;
@@ -104,7 +104,7 @@ namespace cst350groupapp.Services
             {
                 _board.Message = "";
                 floodFill(row, col);
-                if (SafeCellsVisited())
+                if (SafeCellsVisited() && LiveCellsFlagged())
                 {
                     _board.Message = "You Win!";
                     _board.GameState = 1;
@@ -119,19 +119,19 @@ namespace cst350groupapp.Services
         public void RightClick(int row, int col)
         {
             //if the cell is visited, do nothing
-            if (_board.Grid[row, col].Visited)
+            if (_board.Grid[row][col].Visited)
             {
                 return;
             }
             //check if the cell is flagged, if so, unflag it
-            else if (_board.Grid[row, col].ButtonImage == "flag.png")
+            else if (_board.Grid[row][col].ButtonImage == "flag.png")
             {
-                _board.Grid[row, col].ButtonImage = "";
+                _board.Grid[row][col].ButtonImage = "";
             }
             //else, flag the cell
             else
             {
-                _board.Grid[row, col].ButtonImage = "flag.png";
+                _board.Grid[row][col].ButtonImage = "flag.png";
             }
 
         }
@@ -146,7 +146,7 @@ namespace cst350groupapp.Services
             {
                 for (int c = 0; c < _board.Size[1]; ++c)
                 {
-                    if (_board.Grid[r, c].Live)
+                    if (_board.Grid[r][c].Live)
                     {
                         liveCells++;
                     }

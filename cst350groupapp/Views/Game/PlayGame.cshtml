@@ -13,38 +13,20 @@
 <h1>Welcome to your game @firstName, good luck!</h1>
 <h2>The time is @DateTime.Now</h2>
 
-<form asp-action="ButtonLeftClick" method="post">
-    <div class="minesweeper-grid" style="grid-template-columns: repeat(@Model.Size[1], 50px);">
-        @for (int row = 0; row < Model.Size[0]; row++)
-        {
-            @for (int col = 0; col < Model.Size[1]; col++)
-            {
-                var cell = Model.Grid[row, col];
-                <button type="submit" class="game-button" onclick="setCoordinates(@row, @col)" @(Model.GameState != 0 ? "disabled" : "")>
-                    @if (!string.IsNullOrEmpty(cell.ButtonImage))
-                    {
-                        <img src="/img/@cell.ButtonImage" alt="Button" />
-                    }
-                    else if (cell.Visited)
-                    {
-                        <span>@(cell.LiveNeighbors > 0 ? cell.LiveNeighbors.ToString() : "0")</span>
-                    }
-                    else
-                    {
-                    }
-                </button>
-            }
-        }
-    </div>
+<form id="game-form">
+    <partial name="_GameGrid" model="Model" />
     <input type="hidden" id="row" name="row" />
     <input type="hidden" id="col" name="col" />
 </form>
 
 <h2>@Model.Message</h2>
 
-
 <form asp-action="StartOver" method="get">
     <button type="submit" class="start-over-button">Start Over</button>
+</form>
+
+<form asp-action="SaveGame" method="post">
+    <button type="submit" class="save-game-button">Save Game</button>
 </form>
 
 @if (Model.GameState != 0)
@@ -54,9 +36,72 @@
     </form>
 }
 
-<script>
-    function setCoordinates(row, col) {
-        document.getElementById('row').value = row;
-        document.getElementById('col').value = col;
-    }
-</script>
+@section Scripts {
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(document).on("mousedown", ".game-button", function (e) {
+                e.preventDefault();
+                var row = $(this).data("row");
+                var col = $(this).data("col");
+                switch (e.which) {
+                    case 1:
+                        doLeftClick(row, col);
+                        break;
+                    case 2:
+                        // do nothing
+                        break;
+                    case 3:
+                        doRightClick(row, col);
+                        break;
+                    default:
+                        alert("Unknown mouse button clicked");
+                }
+            }); // end document on mousedown
+
+            function doLeftClick(r, c) {
+                $.ajax({
+                    type: "POST",
+                    url: "/Game/ButtonLeftClick",
+                    data: { row: r, col: c },
+                    success: function (response) {
+                        if (response.isGameOver) {
+                            // Game is over, redirect to EndGame
+                            window.location.href = response.redirectUrl;
+                        } else {
+                            // Replace the existing grid with the new partial view
+                            $('.minesweeper-grid').replaceWith(response);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("An error occurred: " + error);
+                    }
+                });
+            } // end doLeftClick
+
+            function doRightClick(r, c) {
+                $.ajax({
+                    type: "POST",
+                    url: "/Game/ButtonRightClick",
+                    data: { row: r, col: c },
+                    success: function (response) {
+                        if (response.isGameOver) {
+                            // Game is over, redirect to EndGame
+                            window.location.href = response.redirectUrl;
+                        } else {
+                            // Replace the existing grid with the new partial view
+                            $('.minesweeper-grid').replaceWith(response);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("An error occurred: " + error);
+                    }
+                });
+            } // end doRightClick
+
+            $(document).on("contextmenu", ".game-button", function (e) {
+                e.preventDefault(); // Prevent the default context menu on right-click
+            });
+        });
+    </script>
+}

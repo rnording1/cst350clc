@@ -4,8 +4,9 @@ namespace cst350groupapp.Models
 {
     public class Board
     {
+        public int Id { get; set; }
         public int[] Size { get; set; }
-        public Cell[,] Grid { get; set; }
+        public Cell[][] Grid { get; set; }
         public double Difficulty { get; set; }
         public string Message { get; set; }
         public int PlayerId { get; set; }
@@ -46,26 +47,32 @@ namespace cst350groupapp.Models
             FinalScore = 0;
             StartTime = null;
             EndTime = null;
+            Id = -1;
         }
 
         public Board()
         {
+            Size = new int[2] { 1, 1 };
+            Grid = new Cell[1][];
+            Grid[0] = new Cell[1] { new Cell(1, 1) };
+            Message = "Default board created.";
         }
 
         //populate each location in Grid with a cell
-        private Cell[,] SetUpGrid()
+        private Cell[][] SetUpGrid()
         {
-            Grid = new Cell[Size[0], Size[1]];
+            Cell[][] grid = new Cell[Size[0]][];
 
             for (int row = 0; row < Size[0]; row++)
             {
+                grid[row] = new Cell[Size[1]];
                 for (int col = 0; col < Size[1]; col++)
                 {
-                    Grid[row, col] = new Cell(row + 1, col + 1);
+                    grid[row][col] = new Cell(row + 1, col + 1);
                 }
             }
 
-            return Grid;
+            return grid;
         }
 
         public void setupLiveNeighbors()
@@ -95,7 +102,7 @@ namespace cst350groupapp.Models
                 for (int live = 0; live < liveCellCount; live++)
                 {
                     var (row, col) = gridPositions[live];
-                    Grid[row, col].Live = true;
+                    Grid[row][col].Live = true;
                 }
 
             }
@@ -129,7 +136,7 @@ namespace cst350groupapp.Models
                             if (neighborRow >= 0 && neighborRow < rows && neighborCol >= 0 && neighborCol < cols)
                             {
                                 //count the live cells
-                                if (Grid[neighborRow, neighborCol].Live)
+                                if (Grid[neighborRow][neighborCol].Live)
                                 {
                                     liveNeighborCount++;
                                 }
@@ -138,7 +145,7 @@ namespace cst350groupapp.Models
                     }
 
                     //set live neighbors to the count
-                    Grid[row, col].LiveNeighbors = liveNeighborCount;
+                    Grid[row][col].LiveNeighbors = liveNeighborCount;
 
                 }
             }
